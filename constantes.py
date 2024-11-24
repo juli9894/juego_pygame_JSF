@@ -10,7 +10,7 @@ ALTO = 800
 VENTANA = (ANCHO,ALTO)
 FPS = 30
 
-TAMAÑO_PREGUNTA = (350,150)
+TAMAÑO_PREGUNTA = (400,150)
 TAMAÑO_RESPUESTA = (250,60)
 TAMAÑO_BOTON = (250,60)
 CUADRO_TEXTO = (250,50)
@@ -26,6 +26,7 @@ COLOR_BLANCO = (255, 255, 255)  # Blanco
 COLOR_NEGRO = (0, 0, 0)         # Negro
 COLOR_VERDE = (0, 255, 0)       # Verde
 COLOR_AZUL = (0, 0, 255)        # Azul
+TRANSPARENTE = (0,0,0,0)
 
 CLICK_SONIDO = pygame.mixer.Sound("sonidos/sonido_boton.mp3")
 
@@ -35,5 +36,8 @@ BOTON_CONFIG = 1
 BOTON_RANKINGS = 2
 BOTON_SALIR = 3
 DELAY_BOTON = 12
-
 VELOCIDAD_FONDO = 1
+OPCION_1 = 0
+OPCION_2 = 1
+OPCION_3 = 2
+OPCION_4 = 3

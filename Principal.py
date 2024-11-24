@@ -17,7 +17,7 @@ pygame.display.set_icon(icono)
 
 # MUSICA DE FONDO
 pygame.mixer.music.load('sonidos/musica.mp3')
-pygame.mixer.music.set_volume(0.5) 
+pygame.mixer.music.set_volume(0.1) 
 pygame.mixer.music.play(-1)
 
 # Configurar la pantalla
