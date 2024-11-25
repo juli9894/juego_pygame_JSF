@@ -76,12 +76,12 @@ def dibujar_corazones_vidas(cantidad_vidas,pantalla):
         else:     
             cargar_y_mostrar_imagen(pantalla,ruta_imagen_gris,dimensiones_corazon,posiciones_corazones[i])
 
-def verificar_respuesta(datos_juego:dict,pregunta_actual:dict,respuesta:int)->bool:
-    if pregunta_actual['respuesta correcta'] == respuesta:
-        datos_juego['puntuacion'] += PUNTUACION_ACIERTO
-        retorno = True
-    else:
-        datos_juego['puntuacion'] -= PUNTUACION_ERROR
-        datos_juego['vidas'] -= 1
-        retorno = False
-    retorno
+# def verificar_respuesta(datos_juego:dict,pregunta_actual:dict,respuesta:int)->bool:
+#     if pregunta_actual['respuesta correcta'] == respuesta:
+#         datos_juego['puntuacion'] += PUNTUACION_ACIERTO
+#         retorno = True
+#     else:
+#         datos_juego['puntuacion'] -= PUNTUACION_ERROR
+#         datos_juego['vidas'] -= 1
+#         retorno = False
+#     retorno

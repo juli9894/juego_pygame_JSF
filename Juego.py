@@ -62,10 +62,6 @@ def mostrar_juego(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event])
                     print(f'DIO CLICK ALA RESPUESTA {respuesta_seleccionada}')
                     CLICK_PELOTAZO.play()
                     cartas_respuestas[i]['superficie'] = pygame.image.load(imagenes_respuestas_seleccionadas[i])
-                    if verificar_respuesta(datos_juego,pregunta_actual,respuesta_seleccionada):
-                        print('CORRECTO')
-                    else:
-                        print('INCORRECTO')
 
                     
             
