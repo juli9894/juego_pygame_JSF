@@ -28,6 +28,8 @@ def mostrar_opciones(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Even
     cargar_y_mostrar_imagen(pantalla,'img/fondo_opciones.png',VENTANA,(0,0))
     # CARGAR BOTON VOLVER
     cargar_y_mostrar_imagen(pantalla, 'img/boton_volver.png', (163,61), (150, 550))
+    # CARGAR PORTATIL
+    cargar_y_mostrar_imagen(pantalla, 'img/portatil.png', VENTANA, (0, 0))
     
     # ACTUALIZAR BOTON VOLVER SELECCIONADO
     boton_volver['rectangulo'] = pantalla.blit(boton_volver['superficie'], boton_volver['rectangulo'].topleft)

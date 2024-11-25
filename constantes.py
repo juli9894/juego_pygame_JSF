@@ -28,14 +28,15 @@ COLOR_VERDE = (0, 255, 0)       # Verde
 COLOR_AZUL = (0, 0, 255)        # Azul
 TRANSPARENTE = (0,0,0,0)
 
-CLICK_SONIDO = pygame.mixer.Sound("sonidos/sonido_boton.mp3")
+CLICK_SONIDO = pygame.mixer.Sound("sonidos/sonido_navegacion.mp3")
+CLICK_PELOTAZO = pygame.mixer.Sound("sonidos/sonido_boton.mp3")
 
 
 BOTON_JUGAR = 0
 BOTON_CONFIG = 1
 BOTON_RANKINGS = 2
 BOTON_SALIR = 3
-DELAY_BOTON = 12
+DELAY_BOTON = 6
 VELOCIDAD_FONDO = 1
 OPCION_1 = 0
 OPCION_2 = 1

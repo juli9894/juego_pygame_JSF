@@ -42,7 +42,7 @@ while corriendo:
     actualizar_fotograma(pantalla,fotogramas,VELOCIDAD_FONDO)
 
 
-    # GESTION DE EVENTOS -> No lo manejamos en este archivo
+    # GESTION DE EVENTOS -> No lo manejamos en este archivoa
     # ACTUALIZACION DEL JUEGO -> No lo manejamos en este archivo
     # DIBUJAR EN PANTALLA -> No lo manejamos en este archivo
     cola_eventos = pygame.event.get()
@@ -61,8 +61,7 @@ while corriendo:
         print('SALIENDO')
         corriendo = False
     
-    # CARGAR PORTATIL
-    cargar_y_mostrar_imagen(pantalla, 'img/portatil.png', VENTANA, (0, 0))
+
     pygame.display.flip()
 
 pygame.quit()

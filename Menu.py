@@ -16,6 +16,7 @@ imagenes_botones = [
     'img/boton_top10.png',
     'img/boton_salir.png'
 ]
+posiciones_botones = [(750,180), (750,280), (750,380), (750,480)]
 
 imagenes_botones_seleccionados = [
     'img/boton_iniciar_seleccionado.png',
@@ -25,11 +26,11 @@ imagenes_botones_seleccionados = [
 ]
 
 # CARGAR IMAGENES DE LOS BOTONES SIN SELECCIONAR
-for nombre_imagen in imagenes_botones:
-    boton = {}
-    boton['superficie'] = pygame.image.load(nombre_imagen)
-    boton['rectangulo'] = boton['superficie'].get_rect()
-    lista_botones.append(boton)
+# for nombre_imagen in imagenes_botones:
+#     boton = {}
+#     boton['superficie'] = pygame.image.load(nombre_imagen)
+#     boton['rectangulo'] = boton['superficie'].get_rect()
+#     lista_botones.append(boton)
 
 contador_impresiones = 0
 boton_seleccionado = None
@@ -41,7 +42,7 @@ def mostrar_menu(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event])-
     pygame.display.set_caption('MENU')
     retorno = 'menu'
 
-
+    lista_botones = cargar_botones_y_posicionar(imagenes_botones,posiciones_botones)
     # GESTION DE EVENTOS
     for evento in cola_eventos:
         if evento.type == pygame.QUIT:
@@ -105,11 +106,12 @@ def mostrar_menu(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event])-
     
 
     # UBICAR LOS BOTONES Y SELECCIONARLOS
-    posiciones_botones = [(750,180), (750,280), (750,380), (750,480)]
+    
     claves_botones = [BOTON_JUGAR, BOTON_CONFIG, BOTON_RANKINGS, BOTON_SALIR]
     for i in range(len(posiciones_botones)):
         lista_botones[claves_botones[i]]['rectangulo'] = pantalla.blit(lista_botones[claves_botones[i]]['superficie'], posiciones_botones[i])
-
+    # CARGAR PORTATIL
+    cargar_y_mostrar_imagen(pantalla, 'img/portatil.png', VENTANA, (0, 0))
 
 
     return retorno
