@@ -21,14 +21,12 @@ pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
 # Configurar la pantalla
-pantalla = pygame.display.set_mode((VENTANA))
+# pantalla = pygame.display.set_mode((VENTANA))
 corriendo = True
 reloj = pygame.time.Clock()
 
-datos_juego = {'puntuacion': 0,
-                'vidas': CANTIDAD_VIDAS,
-                'usuario': '',
-                'volumen_musica': 100}
+
+
 ventana_actual = 'menu'
 #----------------------------------------------------
 # CARGAR FONDO ANIMADO
@@ -41,10 +39,6 @@ while corriendo:
     # CARGAR FONDO ANIMADO
     actualizar_fotograma(pantalla,fotogramas,VELOCIDAD_FONDO)
 
-
-    # GESTION DE EVENTOS -> No lo manejamos en este archivoa
-    # ACTUALIZACION DEL JUEGO -> No lo manejamos en este archivo
-    # DIBUJAR EN PANTALLA -> No lo manejamos en este archivo
     cola_eventos = pygame.event.get()
     reloj.tick(FPS)
 

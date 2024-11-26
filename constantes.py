@@ -1,6 +1,7 @@
 import pygame
 pygame.init()
 
+
 TAMANYO_BOTON = (250,250)
 CUADRO_TEXTO = (250,250)
 TAMANYO_BOTON_VOLUMEN = (60,60)
@@ -9,6 +10,8 @@ ANCHO = 1200
 ALTO = 800
 VENTANA = (ANCHO,ALTO)
 FPS = 30
+
+pantalla = pygame.display.set_mode((VENTANA))
 
 TAMAÑO_PREGUNTA = (400,150)
 TAMAÑO_RESPUESTA = (250,60)
@@ -28,9 +31,11 @@ COLOR_VERDE = (0, 255, 0)       # Verde
 COLOR_AZUL = (0, 0, 255)        # Azul
 TRANSPARENTE = (0,0,0,0)
 
+
 CLICK_SONIDO = pygame.mixer.Sound("sonidos/sonido_navegacion.mp3")
 CLICK_PELOTAZO = pygame.mixer.Sound("sonidos/sonido_boton.mp3")
-
+CLICK_CORRECTO = pygame.mixer.Sound("sonidos/sonido_correcto.mp3")
+CLICK_INCORRECTO = pygame.mixer.Sound("sonidos/sonido_incorrecto.mp3")
 
 BOTON_JUGAR = 0
 BOTON_CONFIG = 1

@@ -14,7 +14,9 @@ fuente_portatil = pygame.font.Font('fuentes/Minecraft.ttf', 30)
 datos_juego = {'puntuacion': 0,
                 'vidas': CANTIDAD_VIDAS,
                 'usuario': '',
-                'volumen_musica': 100}
+                'volumen_musica': 100,
+                'acumulador_correctas': 0}
+
 # OPCIONES RESPUESTAS
 imagenes_respuestas = [
     'img/OPCION_1.png',
@@ -58,14 +60,13 @@ def mostrar_juego(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event])
         if evento.type == pygame.MOUSEBUTTONDOWN:
             for i in range(len(cartas_respuestas)):
                 if cartas_respuestas[i]['rectangulo'].collidepoint(evento.pos):
-                    respuesta_seleccionada = (i + 1)
-                    print(f'DIO CLICK ALA RESPUESTA {respuesta_seleccionada}')
                     CLICK_PELOTAZO.play()
                     cartas_respuestas[i]['superficie'] = pygame.image.load(imagenes_respuestas_seleccionadas[i])
+                    if i + 1 == pregunta_actual['respuesta_correcta']:
+                        marcar_respuesta_correcta(datos_juego)
+                    else:
+                        marcar_respuesta_incorrecta(datos_juego)
 
-                    
-            
-                
   
     cargar_y_mostrar_imagen(pantalla, 'img/fondo_juego_1.png', VENTANA, (0, 0))
 
@@ -84,14 +85,21 @@ def mostrar_juego(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event])
     pantalla.blit(carta_pregunta['superficie'], (500, 150))
 
     # CARGAR PORTATIL
-    cargar_y_mostrar_imagen(pantalla, 'img/portatil.png', VENTANA, (0,0))
+    cargar_y_mostrar_imagen(pantalla, 'img/portatil.png', VENTANA, (0, 0))
     # VIDAS
-    dibujar_corazones_vidas(CANTIDAD_VIDAS,pantalla)
+    dibujar_corazones_vidas(datos_juego['vidas'],pantalla)
     # PUNTUACION
     mostrar_texto(pantalla,f'{datos_juego["puntuacion"]}',(830,643),fuente_portatil,COLOR_BLANCO)
 
     # DIBUJAR LAS RESPUESTAS
     for i in range(len(cartas_respuestas)):
         pantalla.blit(cartas_respuestas[i]['superficie'],cartas_respuestas[i]['rectangulo'])
+        
+    if datos_juego['vidas'] <= 0:
+        fondo = pygame.image.load('img/fondo_puntuacion.png') 
+        fondo = pygame.transform.scale(fondo, (VENTANA))  
+
+        guardar_nombre_y_puntaje(pantalla, fondo, fuente_pregunta, datos_juego['puntuacion'])
+        retorno = 'rankings'
         
     return retorno

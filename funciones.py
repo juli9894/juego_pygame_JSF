@@ -1,6 +1,9 @@
 import pygame
 from variables import indice_fotograma, temporizador
 from constantes import *
+import json
+import os
+
 def mostrar_texto(surface, text, pos, font, color=pygame.Color('black')):
     '''
     SALTO DE LINEA TEXTO
@@ -65,7 +68,7 @@ def cargar_botones_y_posicionar(imagenes:list,posiciones:list):
         retorno = cartas
     return retorno
 
-def dibujar_corazones_vidas(cantidad_vidas,pantalla):
+def dibujar_corazones_vidas(cantidad_vidas: int,pantalla):
     posiciones_corazones = [(380, 633), (440, 633), (500, 633)]
     ruta_imagen_celeste = 'img/corazon_celeste.png'
     ruta_imagen_gris = 'img/corazon_gris.png'
@@ -76,12 +79,69 @@ def dibujar_corazones_vidas(cantidad_vidas,pantalla):
         else:     
             cargar_y_mostrar_imagen(pantalla,ruta_imagen_gris,dimensiones_corazon,posiciones_corazones[i])
 
-# def verificar_respuesta(datos_juego:dict,pregunta_actual:dict,respuesta:int)->bool:
-#     if pregunta_actual['respuesta correcta'] == respuesta:
-#         datos_juego['puntuacion'] += PUNTUACION_ACIERTO
-#         retorno = True
-#     else:
-#         datos_juego['puntuacion'] -= PUNTUACION_ERROR
-#         datos_juego['vidas'] -= 1
-#         retorno = False
-#     retorno
+def marcar_respuesta_correcta(datos_juego: dict):
+    CLICK_CORRECTO.play()
+    datos_juego['puntuacion'] += 10
+    datos_juego['acumulador_correctas'] += 1
+    if datos_juego['acumulador_correctas'] >= 10:
+        datos_juego['vidas'] += 1
+        
+def marcar_respuesta_incorrecta(datos_juego: dict):
+    CLICK_INCORRECTO.play()
+    datos_juego['puntuacion'] -= 5
+    datos_juego['acumulador_correctas'] = 0
+    datos_juego['vidas'] -= 1
+        
+archivo_json = "puntuaciones.json"
+
+# Función para guardar datos en JSON
+def guardar_puntaje(nombre, puntaje):
+    datos = []
+    if os.path.exists(archivo_json):
+        with open(archivo_json, "r") as archivo:
+            try:
+                datos = json.load(archivo)
+            except json.JSONDecodeError:
+                datos = []
+    
+    datos.append({"nombre_usuario": nombre, "puntaje": puntaje})
+    
+    with open(archivo_json, "w") as archivo:
+        json.dump(datos, archivo, indent=4)
+
+def guardar_nombre_y_puntaje(pantalla, fondo, fuente, puntaje):
+    entrada_texto = ""
+    ingresando = True
+
+    while ingresando:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                return None
+            
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_RETURN:
+                    if entrada_texto.strip():
+                        guardar_puntaje(entrada_texto, puntaje)
+                        return entrada_texto
+                elif evento.key == pygame.K_BACKSPACE:  # Borrar texto
+                    entrada_texto = entrada_texto[:-1]
+                else:
+                    entrada_texto += evento.unicode
+                    
+        # Dibujar la pantalla
+        pantalla.blit(fondo, (0, 0))
+
+        # Renderizar cuadro de texto
+        cuadro_rect = pygame.Rect(250, 450, 300, 50)
+        pygame.draw.rect(pantalla, (255, 255, 255), cuadro_rect)
+        pygame.draw.rect(pantalla, (COLOR_NEGRO), cuadro_rect, 2)
+        
+        # Renderizar texto ingresado
+        texto_renderizado = fuente.render(entrada_texto, True, (0, 0, 0))
+        pantalla.blit(texto_renderizado, (cuadro_rect.x + 10, cuadro_rect.y + 10))
+        
+        # Mostrar instrucciones
+        pygame.display.flip()
+    
+
+    
