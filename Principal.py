@@ -54,7 +54,6 @@ while corriendo:
     elif ventana_actual == 'salir':
         print('SALIENDO')
         corriendo = False
-    
 
     pygame.display.flip()
 

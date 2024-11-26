@@ -2,6 +2,7 @@ import pygame
 from constantes import *
 from preguntas import *
 from funciones import *
+from game_over import *
 
 pygame.init()
 
@@ -94,12 +95,10 @@ def mostrar_juego(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event])
     # DIBUJAR LAS RESPUESTAS
     for i in range(len(cartas_respuestas)):
         pantalla.blit(cartas_respuestas[i]['superficie'],cartas_respuestas[i]['rectangulo'])
-        
-    if datos_juego['vidas'] <= 0:
-        fondo = pygame.image.load('img/fondo_puntuacion.png') 
-        fondo = pygame.transform.scale(fondo, (VENTANA))  
 
-        guardar_nombre_y_puntaje(pantalla, fondo, fuente_pregunta, datos_juego['puntuacion'])
-        retorno = 'rankings'
+    if datos_juego['vidas'] <= 0:
+        retorno = game_over(pantalla, 'img/fondo_puntuacion.png', fuente_portatil, datos_juego['puntuacion'])
         
     return retorno
+
+    

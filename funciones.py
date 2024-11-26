@@ -109,10 +109,9 @@ def guardar_puntaje(nombre, puntaje):
     with open(archivo_json, "w") as archivo:
         json.dump(datos, archivo, indent=4)
 
-def guardar_nombre_y_puntaje(pantalla, fondo, fuente, puntaje):
+def guardar_nombre_y_puntaje(pantalla, ruta_fondo, fuente, puntaje, posicion=(0,0)):
     entrada_texto = ""
     ingresando = True
-
     while ingresando:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -129,7 +128,7 @@ def guardar_nombre_y_puntaje(pantalla, fondo, fuente, puntaje):
                     entrada_texto += evento.unicode
                     
         # Dibujar la pantalla
-        pantalla.blit(fondo, (0, 0))
+        cargar_y_mostrar_imagen(pantalla, ruta_fondo, VENTANA, posicion)
 
         # Renderizar cuadro de texto
         cuadro_rect = pygame.Rect(250, 450, 300, 50)
