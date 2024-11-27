@@ -2,7 +2,7 @@ import pygame
 from variables import indice_fotograma, temporizador
 from constantes import *
 import json
-import os
+import csv
 
 def mostrar_texto(surface, text, pos, font, color=pygame.Color('black')):
     '''
@@ -126,7 +126,43 @@ def guardar_datos_en_json(nombre, puntuacion):
     with open("puntajes.json", "w") as archivo:
         json.dump(puntajes, archivo, indent=4)
         
-
+def cargar_preguntas_csv(ruta_archivo):
+    lista_preguntas = []
     
+    with open(ruta_archivo, mode='r', newline='', encoding='utf-8') as archivo:
+        lector_csv = csv.reader(archivo)
+        for fila in lector_csv:
+            pregunta = fila[0]
+            respuestas = fila[1:5]  # Las respuestas son los 4 elementos siguientes
+            respuesta_correcta = respuestas.index(fila[5]) + 1  # El índice de la respuesta correcta (1, 2, 3 o 4)
 
+            # Crear un diccionario con la estructura requerida
+            pregunta_dict = {
+                "pregunta": pregunta,
+                "respuesta_1": respuestas[0],
+                "respuesta_2": respuestas[1],
+                "respuesta_3": respuestas[2],
+                "respuesta_4": respuestas[3],
+                "respuesta_correcta": respuesta_correcta
+            }
+
+            lista_preguntas.append(pregunta_dict)
     
+    return lista_preguntas
+
+def cargar_datos_json(ruta_archivo):
+    with open(ruta_archivo, 'r', encoding='utf-8') as archivo:
+        datos = json.load(archivo)
+    return datos
+
+def quick_sort(lista, clave, asc=True):
+    if len(lista) <= 1:
+        return lista
+    else:
+        pivot = lista[0]
+        menores = [item for item in lista[1:] if item[clave] <= pivot[clave]]
+        mayores = [item for item in lista[1:] if item[clave] > pivot[clave]]
+        if asc:
+            return quick_sort(mayores, clave, asc) + [pivot] + quick_sort(menores, clave, asc)
+        else:
+            return quick_sort(menores, clave, asc) + [pivot] + quick_sort(mayores, clave, asc)

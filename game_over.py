@@ -31,7 +31,7 @@ def mostrar_game_over(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Eve
             if evento.key == pygame.K_RETURN:  # Guarda al presionar enter
                 if nombre.isalpha():
                     guardar_datos_en_json(nombre, datos_juego['puntuacion']) 
-                    # reiniciar_datos_juego(datos_juego)
+                    reiniciar_datos_juego(datos_juego)
                     retorno = 'menu'
                 else:
                     mensaje_error = "El nombre solo debe contener letras."
@@ -70,7 +70,7 @@ def mostrar_game_over(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Eve
     # REINICIAR BOTON VOLVER SELECCIONADO
     boton_salir['superficie'] = pygame.image.load('img/boton_salir.png')
     boton_salir['rectangulo'] = pygame.Rect(150, 550, 163, 61)
-    reiniciar_datos_juego(datos_juego)
-    pygame.display.flip()
+    
+    # pygame.display.flip()
     
     return retorno

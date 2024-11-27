@@ -28,6 +28,7 @@ imagenes_respuestas_seleccionadas = [
     'img/OPCION_4_seleccionada.png'
 ]
 
+lista_preguntas = cargar_preguntas_csv('preguntas.csv')
 
 posiciones_botones = [(650,290), (650,360), (650,430), (650,500)]
 
@@ -39,6 +40,7 @@ bandera_respuesta = False
 
 def mostrar_juego(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event], datos_juego:dict)->str:
     global indice
+    global lista_preguntas
     global bandera_respuesta
     global cartas_respuestas
     
@@ -83,7 +85,7 @@ def mostrar_juego(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event],
         cargar_y_mostrar_imagen(pantalla, 'img/fondo_juego_2.png', VENTANA, (0, 0))
 
     # CONFIGURAR PREGUNTA
-    carta_pregunta['superficie'] = pygame.Surface((650,200), pygame.SRCALPHA) 
+    carta_pregunta['superficie'] = pygame.Surface((615,200), pygame.SRCALPHA) 
     carta_pregunta['superficie'].fill(TRANSPARENTE)
 
     # AGREGAR TEXTO ALA PREGUNTA
@@ -112,6 +114,7 @@ def mostrar_juego(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event],
     if datos_juego['vidas'] <= 0:
         retorno = 'game_over'
         CLICK_GAME_OVER.play()
+        indice = 0
         
     return retorno
 
