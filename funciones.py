@@ -35,6 +35,15 @@ def cargar_fondo_animado(ruta_base,cantidad_fotogramas)->list:
         fotogramas.append(pygame.image.load(ruta))
     return fotogramas
 
+def reiniciar_datos_juego(datos_juego: dict)-> None:
+    """Reinicia el diccionario del jugador para una nueva partida
+
+    Returns:
+        dict:
+    """
+    datos_juego['puntuacion'] = 0
+    datos_juego['vidas'] = 3
+    datos_juego['acumulador_correctas'] = 0
 
 def actualizar_fotograma(pantalla, fotogramas, velocidad_fondo):
     global indice_fotograma, temporizador
@@ -46,8 +55,17 @@ def actualizar_fotograma(pantalla, fotogramas, velocidad_fondo):
         temporizador = 0
     pantalla.blit(fotogramas[indice_fotograma], (0, 0))
     
+def crear_diccionario_boton(ruta_imagen)->dict:
+    """ Crea un diccionario con la superficie y el rectangulo del boton
 
-
+    Args:
+        ruta_imagen (str): path de la imagen
+    """
+    boton = {
+    'superficie': pygame.image.load(ruta_imagen),
+    'rectangulo': pygame.Rect(150, 550, 163, 61)
+    }
+    return boton
 
 def cargar_y_mostrar_imagen(pantalla, ruta_imagen:str, dimensiones:tuple, posicion):
     imagen = pygame.image.load(ruta_imagen)

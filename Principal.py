@@ -6,8 +6,15 @@ from Menu import mostrar_menu
 from Juego import mostrar_juego
 from Opciones import mostrar_opciones
 from Rankings import mostrar_rankings
+from game_over import mostrar_game_over
 
 pygame.init()
+
+datos_juego = {'puntuacion': 0,
+                'vidas': CANTIDAD_VIDAS,
+                'volumen_musica': 100,
+                'acumulador_correctas': 0,
+                'nivel_actual' : 1}
 
 #----------------------------------------------------
 # Configuraciones basicas de mi juego
@@ -46,11 +53,13 @@ while corriendo:
     if ventana_actual == 'menu':
         ventana_actual = mostrar_menu(pantalla,cola_eventos)
     elif ventana_actual == 'jugar':
-        ventana_actual = mostrar_juego(pantalla,cola_eventos)
+        ventana_actual = mostrar_juego(pantalla,cola_eventos,datos_juego)
     elif ventana_actual == 'opciones':
         ventana_actual = mostrar_opciones(pantalla,cola_eventos)
     elif ventana_actual == 'rankings':
         ventana_actual = mostrar_rankings(pantalla,cola_eventos)
+    elif ventana_actual == 'game_over':
+        ventana_actual = mostrar_game_over(pantalla,cola_eventos, datos_juego)
     elif ventana_actual == 'salir':
         print('SALIENDO')
         corriendo = False
