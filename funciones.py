@@ -44,6 +44,7 @@ def reiniciar_datos_juego(datos_juego: dict)-> None:
     datos_juego['puntuacion'] = 0
     datos_juego['vidas'] = 3
     datos_juego['acumulador_correctas'] = 0
+    datos_juego['nivel_juego'] = 1
 
 def actualizar_fotograma(pantalla, fotogramas, velocidad_fondo):
     global indice_fotograma, temporizador
@@ -113,52 +114,19 @@ def marcar_respuesta_incorrecta(datos_juego: dict):
 archivo_json = "puntuaciones.json"
 
 # Función para guardar datos en JSON
-def guardar_puntaje(nombre, puntaje):
-    datos = []
-    if os.path.exists(archivo_json):
-        with open(archivo_json, "r") as archivo:
-            try:
-                datos = json.load(archivo)
-            except json.JSONDecodeError:
-                datos = []
-    
-    datos.append({"nombre_usuario": nombre, "puntaje": puntaje})
-    
-    with open(archivo_json, "w") as archivo:
-        json.dump(datos, archivo, indent=4)
+def guardar_datos_en_json(nombre, puntuacion):
+    datos = {"nombre": nombre, "puntuacion": puntuacion}
+    try:
+        with open("puntajes.json", "r") as archivo:
+            puntajes = json.load(archivo)
+    except (FileNotFoundError, json.JSONDecodeError):
+        puntajes = []
 
-def guardar_nombre_y_puntaje(pantalla, ruta_fondo, fuente, puntaje, posicion=(0,0)):
-    entrada_texto = ""
-    ingresando = True
-    while ingresando:
-        for evento in pygame.event.get():
-            if evento.type == pygame.QUIT:
-                return None
-            
-            if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_RETURN:
-                    if entrada_texto.strip():
-                        guardar_puntaje(entrada_texto, puntaje)
-                        return entrada_texto
-                elif evento.key == pygame.K_BACKSPACE:  # Borrar texto
-                    entrada_texto = entrada_texto[:-1]
-                else:
-                    entrada_texto += evento.unicode
-                    
-        # Dibujar la pantalla
-        cargar_y_mostrar_imagen(pantalla, ruta_fondo, VENTANA, posicion)
+    puntajes.append(datos)
+    with open("puntajes.json", "w") as archivo:
+        json.dump(puntajes, archivo, indent=4)
+        
 
-        # Renderizar cuadro de texto
-        cuadro_rect = pygame.Rect(250, 450, 300, 50)
-        pygame.draw.rect(pantalla, (255, 255, 255), cuadro_rect)
-        pygame.draw.rect(pantalla, (COLOR_NEGRO), cuadro_rect, 2)
-        
-        # Renderizar texto ingresado
-        texto_renderizado = fuente.render(entrada_texto, True, (0, 0, 0))
-        pantalla.blit(texto_renderizado, (cuadro_rect.x + 10, cuadro_rect.y + 10))
-        
-        # Mostrar instrucciones
-        pygame.display.flip()
     
 
     

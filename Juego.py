@@ -11,12 +11,7 @@ fuente_pregunta = pygame.font.SysFont('impact', 30)
 fuente_respuesta = pygame.font.SysFont('arial', 25) 
 fuente_portatil = pygame.font.Font('fuentes/Minecraft.ttf', 30)
 
-indice = 0
-
-# datos_juego = {'puntuacion': 0,
-#                 'vidas': CANTIDAD_VIDAS,
-#                 'volumen_musica': 100,
-#                 'acumulador_correctas': 0}
+indice = 1
 
 # OPCIONES RESPUESTAS
 imagenes_respuestas = [
@@ -94,8 +89,6 @@ def mostrar_juego(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event],
     # AGREGAR TEXTO ALA PREGUNTA
     mostrar_texto(carta_pregunta['superficie'],pregunta_actual['pregunta'],(20,20),fuente_pregunta,COLOR_NEGRO)
     # AGREGAR TEXTO ALAS RESPUESTAS
-    # for i in range(len(claves_botones)):
-    #     mostrar_texto(cartas_respuestas[i]['superficie'],pregunta_actual[f'respuesta_{i+1}'],(120,20),fuente_respuesta,COLOR_NEGRO)
     mostrar_texto(cartas_respuestas[0]['superficie'],pregunta_actual['respuesta_1'],(120,20),fuente_respuesta,COLOR_NEGRO)
     mostrar_texto(cartas_respuestas[1]['superficie'],pregunta_actual['respuesta_2'],(120,20),fuente_respuesta,COLOR_NEGRO)
     mostrar_texto(cartas_respuestas[2]['superficie'],pregunta_actual['respuesta_3'],(120,20),fuente_respuesta,COLOR_NEGRO)
