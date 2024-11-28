@@ -166,3 +166,8 @@ def quick_sort(lista, clave, asc=True):
             return quick_sort(mayores, clave, asc) + [pivot] + quick_sort(menores, clave, asc)
         else:
             return quick_sort(menores, clave, asc) + [pivot] + quick_sort(mayores, clave, asc)
+
+def actualizar_ranking(ruta_archivo):
+    lista_ranking = cargar_datos_json(ruta_archivo)
+    quick_sort(lista_ranking, 'puntuacion')
+    return lista_ranking

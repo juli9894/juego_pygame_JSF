@@ -25,13 +25,14 @@ def mostrar_game_over(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Eve
                 CLICK_SONIDO.play()
                 boton_salir['superficie'] = boton_salir_seleccionado['superficie']
                 retorno = 'menu'
-                
+                reiniciar_datos_juego(datos_juego)
         #---------
         if evento.type == pygame.KEYDOWN:
             if evento.key == pygame.K_RETURN:  # Guarda al presionar enter
                 if nombre.isalpha():
-                    guardar_datos_en_json(nombre, datos_juego['puntuacion']) 
+                    guardar_datos_en_json(nombre, datos_juego['puntuacion'])
                     reiniciar_datos_juego(datos_juego)
+                    
                     retorno = 'menu'
                 else:
                     mensaje_error = "El nombre solo debe contener letras."
@@ -55,7 +56,6 @@ def mostrar_game_over(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Eve
     
     #Rectangulo nombre
     input_rect = pygame.Rect(770, 380, 200, 40)
-    # pygame.draw.rect(pantalla, (200, 200, 200), input_rect, 2)
     
     texto_nombre = fuente_game_over.render(nombre, True, (COLOR_NEGRO))
     pantalla.blit(texto_nombre, (input_rect.x + 5, input_rect.y + 5))

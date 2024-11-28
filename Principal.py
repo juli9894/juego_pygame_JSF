@@ -15,7 +15,6 @@ datos_juego = {'puntuacion': 0,
                 'acumulador_correctas': 0,
                 'nivel_actual' : 1}
 
-lista_ranking_ordenado = quick_sort(cargar_datos_json("puntajes.json"), 'puntuacion')
 #----------------------------------------------------
 # Configuraciones basicas de mi juego
 pygame.display.set_caption('PREGUNTA Y GOL!!')
@@ -57,7 +56,7 @@ while corriendo:
     elif ventana_actual == 'opciones':
         ventana_actual = mostrar_opciones(pantalla,cola_eventos)
     elif ventana_actual == 'rankings':
-        ventana_actual = mostrar_rankings(pantalla,cola_eventos, lista_ranking_ordenado[:10])
+        ventana_actual = mostrar_rankings(pantalla,cola_eventos, quick_sort(actualizar_ranking('puntajes.json'),'puntuacion'))
     elif ventana_actual == 'game_over':
         ventana_actual = mostrar_game_over(pantalla,cola_eventos, datos_juego)
     elif ventana_actual == 'salir':
